@@ -1,30 +1,55 @@
+import java.util.Scanner;
+
 public class Main {
+
     public static void main(String[] args) {
 
-        int[] arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+        Scanner scanner = new Scanner(System.in);
 
-        // ---- Brute Force ----
-        long startBF = System.nanoTime();
-        int resultBF = BruteForce.maxSubarray(arr);
-        long endBF = System.nanoTime();
-        long timeBF = endBF - startBF;
+        // Input jumlah elemen array
+        System.out.print("Masukkan jumlah elemen array: ");
+        int n = scanner.nextInt();
 
-        // ---- Kadane ----
-        long startKD = System.nanoTime();
-        int resultKD = Kadane.maxSubarray(arr);
-        long endKD = System.nanoTime();
-        long timeKD = endKD - startKD;
+        if (n <= 0) {
+            System.out.println("Jumlah elemen harus lebih dari 0.");
+            return;
+        }
 
-        // ---- Output ----
-        System.out.println("=== Maximum Subarray Comparison ===\n");
+        int[] arr = new int[n];
 
-        System.out.println("Brute Force Result : " + resultBF);
-        System.out.println("Brute Force Time   : " + timeBF + " ns\n");
+        // Input elemen array
+        System.out.println("Masukkan elemen array:");
+        for (int i = 0; i < n; i++) {
+            System.out.print("Elemen ke-" + (i + 1) + ": ");
+            arr[i] = scanner.nextInt();
+        }
 
-        System.out.println("Kadane Result      : " + resultKD);
-        System.out.println("Kadane Time        : " + timeKD + " ns\n");
+        // Menjalankan algoritma Kadane (Iteratif)
+        int resultKadane = Kadane.maxSubarray(arr);
 
-        System.out.println("Kadane lebih cepat sekitar " +
-                (double) timeBF / timeKD + "x dari Brute Force");
+        // Menjalankan algoritma Divide and Conquer (Rekursif)
+        int resultRecursive = MaxSubarrayRecursive.maxSubarray(arr);
+
+        // Menampilkan array
+        System.out.println("\nArray yang dimasukkan:");
+        printArray(arr);
+
+        // Menampilkan hasil
+        System.out.println("\nHasil Maximum Subarray:");
+        System.out.println("Kadane (Iteratif)          : " + resultKadane);
+        System.out.println("Divide & Conquer (Rekursif): " + resultRecursive);
+
+        scanner.close();
+    }
+
+    private static void printArray(int[] arr) {
+        System.out.print("[ ");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i]);
+            if (i < arr.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println(" ]");
     }
 }
