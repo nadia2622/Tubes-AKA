@@ -7,15 +7,15 @@ public class Kadane {
      * Time Complexity  : O(n)
      * Space Complexity: O(1)
      */
-    public static int maxSubarray(int[] arr) {
+    public static long maxSubarray(long[] arr) {
 
         // currentSum menyimpan jumlah maksimum subarray
         // yang BERAKHIR pada indeks saat ini (indeks i)
-        int currentSum = arr[0];
+        long currentSum = arr[0];
 
         // maxSum menyimpan jumlah maksimum subarray
         // terbesar yang ditemukan sejauh ini (global maximum)
-        int maxSum = arr[0];
+        long maxSum = arr[0];
 
         // Perulangan dimulai dari indeks ke-1
         // karena indeks ke-0 sudah digunakan untuk inisialisasi

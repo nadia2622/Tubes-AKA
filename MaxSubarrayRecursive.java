@@ -7,7 +7,7 @@ public class MaxSubarrayRecursive {
      * Time Complexity  : O(n log n)
      * Space Complexity: O(log n) karena stack rekursi
      */
-    public static int maxSubarray(int[] arr) {
+    public static long maxSubarray(long[] arr) {
         // Memanggil fungsi helper dengan batas indeks awal dan akhir array
         return maxSubarrayHelper(arr, 0, arr.length - 1);
     }
@@ -16,7 +16,7 @@ public class MaxSubarrayRecursive {
      * Fungsi rekursif untuk mencari maksimum subarray
      * pada rentang indeks left hingga right.
      */
-    private static int maxSubarrayHelper(int[] arr, int left, int right) {
+    private static long maxSubarrayHelper(long[] arr, int left, int right) {
 
         // Base case:
         // Jika hanya ada satu elemen, maka elemen tersebut
@@ -32,19 +32,19 @@ public class MaxSubarrayRecursive {
          * Rekursi ke bagian kiri array:
          * mencari maksimum subarray pada indeks left hingga mid
          */
-        int leftMax = maxSubarrayHelper(arr, left, mid);
+        long leftMax = maxSubarrayHelper(arr, left, mid);
 
         /*
          * Rekursi ke bagian kanan array:
          * mencari maksimum subarray pada indeks mid+1 hingga right
          */
-        int rightMax = maxSubarrayHelper(arr, mid + 1, right);
+        long rightMax = maxSubarrayHelper(arr, mid + 1, right);
 
         /*
          * Menghitung maksimum subarray yang melewati titik tengah
          * (menggabungkan bagian kiri dan kanan)
          */
-        int crossMax = maxCrossingSum(arr, left, mid, right);
+        long crossMax = maxCrossingSum(arr, left, mid, right);
 
         /*
          * Hasil maksimum subarray pada rentang ini adalah
@@ -60,11 +60,11 @@ public class MaxSubarrayRecursive {
      * Fungsi untuk menghitung maksimum subarray
      * yang melewati titik tengah array.
      */
-    private static int maxCrossingSum(int[] arr, int left, int mid, int right) {
+    private static long maxCrossingSum(long[] arr, int left, int mid, int right) {
 
         // Menghitung maksimum subarray dari tengah ke kiri
-        int sum = 0;
-        int leftSum = Integer.MIN_VALUE;
+        long sum = 0;
+        long leftSum = Integer.MIN_VALUE;
 
         for (int i = mid; i >= left; i--) {
             sum += arr[i];
@@ -74,7 +74,7 @@ public class MaxSubarrayRecursive {
 
         // Menghitung maksimum subarray dari tengah ke kanan
         sum = 0;
-        int rightSum = Integer.MIN_VALUE;
+        long rightSum = Integer.MIN_VALUE;
 
         for (int i = mid + 1; i <= right; i++) {
             sum += arr[i];
